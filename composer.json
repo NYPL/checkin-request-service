@@ -1,0 +1,26 @@
+{
+  "name": "nypl-checkin-request-service",
+  "description": "NYPL Checkin Request Service Package",
+  "require": {
+    "nypl/microservice-starter": "1.1.19",
+    "firebase/php-jwt": "4.0.0",
+    "danmichaelo/quitesimplexmlelement": "1.0.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.2.1",
+    "php-coveralls/php-coveralls": "dev-master",
+    "squizlabs/php_codesniffer": "3.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "NYPL\\Services\\": [ "src/" ],
+      "NYPL\\Services\\Test\\": [ "tests/" ]
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "php -r \"copy('vendor/nypl/microservice-starter/scripts/index.js', 'index.js');\"",
+      "php -r \"copy('vendor/nypl/microservice-starter/scripts/parser.js', 'parser.js');\""
+    ]
+  }
+}

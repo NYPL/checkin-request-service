@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<NCIPMessage version="http://www.niso.org/schemas/ncip/v2_0/ncip_v2_0.xsd" xmlns="http://www.niso.org/2008/ncip">
+<CheckInItem>
+    <ItemId>
+        <AgencyId>nypl</AgencyId>
+        <ItemIdentifierType>Barcode Id</ItemIdentifierType>
+        <ItemIdentifierValue>Barcode</ItemIdentifierValue>
+    </ItemId>
+    <ItemElementType>Bibliographic Description</ItemElementType>
+    <ItemElementType>Item Description</ItemElementType>
+</CheckInItem>
+</NCIPMessage>
