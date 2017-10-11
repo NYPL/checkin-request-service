@@ -52,7 +52,7 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
                 "type" => "record",
                 "fields" => [
                     ["name" => "id", "type" => "int"],
-                    ["name" => "cancelRequestId", "type" => "int"],
+                    ["name" => "cancelRequestId", "type" => ["int", "null"]],
                     ["name" => "jobId", "type" => ["string", "null"]],
                     ["name" => "itemBarcode", "type" => "string"],
                     ["name" => "owningInstitutionId", "type" => ["string", "null"]],

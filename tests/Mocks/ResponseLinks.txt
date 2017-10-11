@@ -1,0 +1,7 @@
+Mocky Respones:
+400: http://www.mocky.io/v2/5988ac382700006e07afefa5
+404: http://www.mocky.io/v2/5988acbd2700007907afefa7
+408: http://www.mocky.io/v2/5988acfd2700007c07afefa8
+500: http://www.mocky.io/v2/5988ad332700007f07afefa9
+502: http://www.mocky.io/v2/5988ad542700008407afefab
+503: http://www.mocky.io/v2/5988ad6f2700008a07afefac

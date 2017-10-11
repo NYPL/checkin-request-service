@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<NCIPMessage version="http://www.niso.org/schemas/ncip/v2_0/ncip_v2_0.xsd" xmlns="http://www.niso.org/2008/ncip">
+    <CheckInItemResponse>
+        <ItemId>
+            <AgencyId>rc2ma</AgencyId>
+            <ItemIdentifierType>Barcode Id</ItemIdentifierType>
+            <ItemIdentifierValue>33433000948251</ItemIdentifierValue>
+        </ItemId>
+        <UserId>
+            <AgencyId>mm   </AgencyId>
+            <UserIdentifierType>Barcode Id</UserIdentifierType>
+            <UserIdentifierValue>234567890987654</UserIdentifierValue>
+        </UserId>
+        <ItemOptionalFields>
+            <BibliographicDescription>
+                <Author>Allen, Ruth,</Author>
+                <Title>An annotated bibliography of biomedical computer applications.</Title>
+            </BibliographicDescription>
+            <ItemDescription>
+                <CallNumber>JXE 71-1</CallNumber>
+                <ItemDescriptionLevel>Bibliographic Item</ItemDescriptionLevel>
+            </ItemDescription>
+        </ItemOptionalFields>
+    </CheckInItemResponse>
+</NCIPMessage>
