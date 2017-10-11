@@ -23,9 +23,7 @@ class CheckinItemTest extends TestCase
     /**
      * @covers NYPL\Services\Model\NCIPMessage\CheckinItem::buildMessage()
      * @covers NYPL\Services\Model\NCIPMessage\CheckinItem::initializeMessage()
-     * @covers NYPL\Services\Model\NCIPMessage\CheckinItem::replacePatronBarcode()
      * @covers NYPL\Services\Model\NCIPMessage\CheckinItem::replaceItemBarcode()
-     * @covers NYPL\Services\Model\NCIPMessage\CheckinItem::replaceDesiredDateDue()
      */
     public function testIfMessageIsInitialized()
     {
