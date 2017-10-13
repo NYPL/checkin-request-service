@@ -97,4 +97,24 @@ class CheckinRequestModel extends Model
     {
         $this->jobId = $jobId;
     }
+
+    /**
+     * @param array $properties
+     */
+    public function addExcludedProperties(array $properties)
+    {
+        $excluded = $this->getExcludeProperties();
+        $excluded = array_merge($excluded, $properties);
+        $this->setExcludeProperties($excluded);
+    }
+
+    /**
+     * @param array $properties
+     */
+    public function removeExcludedProperties(array $properties)
+    {
+        $excluded = $this->getExcludeProperties();
+        $excluded = array_diff($excluded, $properties);
+        $this->setExcludeProperties($excluded);
+    }
 }

@@ -3,6 +3,7 @@ namespace NYPL\Services\Controller;
 
 use NYPL\Services\CancelRequestLogger;
 use NYPL\Services\CheckinClient;
+use NYPL\Services\JobService;
 use NYPL\Services\Model\CheckinRequest\CheckinRequest;
 use NYPL\Services\Model\NCIPResponse\CheckinItemErrorResponse;
 use NYPL\Services\Model\Response\CheckinRequestErrorResponse;
@@ -71,8 +72,9 @@ class CheckinRequestController extends ServiceController
         try {
 
             $data = $this->getRequest()->getParsedBody();
-
             $checkinRequest = new CheckinRequest($data);
+            // Exclude checkinJobId and processed values used for non-cancellation responses.
+            $checkinRequest->addExcludedProperties(['checkinJobId', 'processed']);
 
             APILogger::addDebug('POST request sent.', $data);
 
@@ -85,12 +87,24 @@ class CheckinRequestController extends ServiceController
 
             $checkinRequest->create();
 
+            // Initiate a job for non-cancellation requests.
+            if (is_null($checkinRequest->getJobId()) && $this->isUseJobService()) {
+                $checkinRequest->setCheckinJobId(JobService::generateJobId($this->isUseJobService()));
+                // Set jobId for proper responses for non-cancellation requests.
+                $checkinRequest->setJobId($checkinRequest->getCheckinJobId());
+                APILogger::addDebug(
+                    'Initiating job via Job Service API ReCAP checkin request.',
+                    ['checkinJobID' => $checkinRequest->getCheckinJobId()]
+                );
+                JobService::beginJob($checkinRequest);
+            }
+
             // Send CheckinRequest to client.
             $initLogMessage = 'Initiating checkin process.';
             if (is_int($checkinRequest->getCancelRequestId())) {
                 $initLogMessage .= ' (CancelRequestID: ' . $checkinRequest->getCancelRequestId() . ')';
+                CancelRequestLogger::addInfo($initLogMessage);
             }
-            CancelRequestLogger::addInfo($initLogMessage);
 
             // Assume success unless an error response is returned.
             $successFlag = true;
@@ -106,12 +120,20 @@ class CheckinRequestController extends ServiceController
             $updateLogMessage = 'Updating checkin request status.';
             if (is_int($checkinRequest->getCancelRequestId())) {
                 $updateLogMessage .= ' (CancelRequestID: ' . $checkinRequest->getCancelRequestId() . ')';
+                CancelRequestLogger::addInfo($updateLogMessage);
             }
-            CancelRequestLogger::addInfo($updateLogMessage);
 
             $checkinRequest->update(
                 ['success' => $successFlag]
             );
+
+            // Finish job processing for non-cancellation requests.
+            if (!is_null($checkinRequest->getCheckinJobId()) && $this->isUseJobService()) {
+                APILogger::addDebug('Updating checkin job.', ['checkinJobID' => $checkinRequest->getCheckinJobId()]);
+                JobService::finishJob($checkinRequest);
+                // Add processed value back for non-cancellation responses.
+                $checkinRequest->removeExcludedProperties(['processed']);
+            }
 
             return $this->getResponse()->withJson($checkinResponse)->withStatus($checkinStatus);
 

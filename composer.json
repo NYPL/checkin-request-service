@@ -4,6 +4,7 @@
   "require": {
     "nypl/microservice-starter": "1.1.19",
     "firebase/php-jwt": "4.0.0",
+    "ramsey/uuid": "3.6.1",
     "danmichaelo/quitesimplexmlelement": "1.0.1"
   },
   "require-dev": {
