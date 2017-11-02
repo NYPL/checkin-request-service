@@ -22,7 +22,6 @@ use Slim\Http\Response;
  */
 class CheckinRequestController extends ServiceController
 {
-
     /**
      * @SWG\Post(
      *     path="/v0.1/checkin-requests",
@@ -106,7 +105,6 @@ class CheckinRequestController extends ServiceController
             ))->withStatus(400);
 
         } catch (\Exception $exception) {
-            APILogger::addError('Exception thrown.', [$exception->getMessage()]);
             $errorType = 'process-checkin-request-error';
             $errorMsg = 'Unable to process checkin request due to a problem with dependent services.';
 
