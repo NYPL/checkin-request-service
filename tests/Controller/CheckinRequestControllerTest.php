@@ -24,38 +24,39 @@ class CheckinRequestControllerTest extends TestCase
 
             public function __construct(\Slim\Container $container, $cacheSeconds)
             {
+                $this->setUseJobService(1);
                 parent::__construct($container, $cacheSeconds);
             }
 
-            public function processCheckinRequest()
+            public function createCheckinRequest()
             {
-                return parent::processCheckinRequest();
+                return parent::createCheckinRequest();
             }
 
         };
     }
 
     /**
-     * @covers NYPL\Services\Controller\CheckinRequestController::processCheckinRequest()
+     * @covers NYPL\Services\Controller\CheckinRequestController::createCheckinRequest()
      */
     public function testCreatesCheckOutModelFromRequest()
     {
         $controller = $this->fakeCheckinController;
 
-        $response = $controller->processCheckinRequest();
+        $response = $controller->createCheckinRequest();
 
         self::assertInstanceOf('Slim\Http\Response', $response);
     }
 
     /**
-     * @covers NYPL\Services\Controller\CheckinRequestController::processCheckinRequest()
+     * @covers NYPL\Services\Controller\CheckinRequestController::createCheckinRequest()
      */
     public function testMisconfigurationThrowsException()
     {
         $controller = $this->fakeCheckinController;
 
-        $response = $controller->processCheckinRequest();
+        $response = $controller->createCheckinRequest();
 
-        self::assertSame(400, $response->getStatusCode());
+        self::assertSame(500, $response->getStatusCode());
     }
 }

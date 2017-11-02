@@ -33,6 +33,11 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
     public $success = false;
 
     /**
+     * @var bool
+     */
+    public $processed = true;
+
+    /**
      * @SWG\Property(example="2016-01-07T02:32:51Z", type="string")
      * @var LocalDateTime
      */
@@ -43,6 +48,11 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
      * @var LocalDateTime
      */
     public $updatedDate;
+
+    /**
+     * @var string
+     */
+    public $checkinJobId;
 
     public function getSchema()
     {
@@ -161,6 +171,38 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
     public function translateUpdatedDate($updatedDate = '')
     {
         return new LocalDateTime(LocalDateTime::FORMAT_DATE_TIME_RFC, $updatedDate);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProcessed()
+    {
+        return $this->processed;
+    }
+
+    /**
+     * @param mixed $processed
+     */
+    public function setProcessed($processed)
+    {
+        $this->processed = $processed;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCheckinJobId()
+    {
+        return $this->checkinJobId;
+    }
+
+    /**
+     * @param string $checkinJobId
+     */
+    public function setCheckinJobId($checkinJobId)
+    {
+        $this->checkinJobId = $checkinJobId;
     }
 
     /**
