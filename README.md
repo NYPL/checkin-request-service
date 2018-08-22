@@ -14,7 +14,7 @@ After these responsibilities are met, the contract ends and another
 service or consumer takes over or the request terminates in a response from this
 service.
 
-This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service).
+This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service). The two services now are consumed by [Cancel Request Consumer](https://github.com/NYPL/cancel-request-consumer) for canceling a hold on ReCap.
 
 This package is intended to be used as a Lambda-based Node.js/PHP Patron Service using the 
 [NYPL PHP Microservice Starter](https://github.com/NYPL/php-microservice-starter).
@@ -73,7 +73,7 @@ the proper AWS Lambda VPC, security group, and role.
 
 ### config/var_app
 
-Configures environment variables common to *all* environments.
+Configures environment variables common to *all* environments. This is also the place that holds the environment variables you need for running the service locally.
 
 ### config/var_*environment*.env
 
@@ -102,6 +102,8 @@ php -S localhost:8888 -t . index.php
 ~~~~
 
 You can then make a request to the Lambda: `http://localhost:8888/api/v0.1/patrons`.
+
+Notice that you will need a running database assigned to the service. Please set the correct configurations for the database in config/var_app.
 
 ### Swagger Documentation Generator
 
