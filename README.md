@@ -14,7 +14,7 @@ After these responsibilities are met, the contract ends and another
 service or consumer takes over or the request terminates in a response from this
 service.
 
-This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service). The two services now are consumed by [Cancel Request Consumer](https://github.com/NYPL/cancel-request-consumer) for canceling a hold on ReCap.
+This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service). The two services now are consumed by [Cancel Request Consumer](https://github.com/NYPL/cancel-request-consumer) for canceling a hold on ReCap. The way to perform the cancelling is to check out and check in the item right away.
 
 This package is intended to be used as a Lambda-based Node.js/PHP Patron Service using the 
 [NYPL PHP Microservice Starter](https://github.com/NYPL/php-microservice-starter).
@@ -112,6 +112,10 @@ Create a Swagger route to generate Swagger specification documentation:
 ~~~~
 $service->get("/docs", SwaggerGenerator::class);
 ~~~~
+
+### Response
+
+A successful response for checking in will return a status code of `202`. However, if you continue to check in the same item — even it has been checked in — the response will still be succesful but only with a status code of `208`.
 
 ## Deployment
 
