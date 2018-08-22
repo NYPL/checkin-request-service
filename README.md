@@ -14,7 +14,7 @@ After these responsibilities are met, the contract ends and another
 service or consumer takes over or the request terminates in a response from this
 service.
 
-This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service). The two services now are consumed by [Cancel Request Consumer](https://github.com/NYPL/cancel-request-consumer) for canceling a hold on ReCap. The way to perform the cancelling is to check out and check in the item right away.
+This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service). The two services now are consumed by [Cancel Request Consumer](https://github.com/NYPL/cancel-request-consumer) for canceling a hold on a ReCap item in Sierra. The way to perform the cancelling is to check out and check in the item right away.
 
 This package is intended to be used as a Lambda-based Node.js/PHP Patron Service using the 
 [NYPL PHP Microservice Starter](https://github.com/NYPL/php-microservice-starter).
