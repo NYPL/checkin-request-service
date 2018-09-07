@@ -32,7 +32,7 @@ deploy:
   skip_cleanup: true
   script: npm run deploy-development
   on:
-    branch: add-ci-cd-from-travis
+    branch: development
 after_deploy: echo 'Successfully executed deploy trigger for Checkin Request Service
   on AWS'
 env:
