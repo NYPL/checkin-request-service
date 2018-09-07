@@ -12,8 +12,8 @@
   },
   "repository": {},
   "keywords": [],
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "node-lambda": "^0.12.0"
-  },
-  "devDependencies": {}
+  }
 }
