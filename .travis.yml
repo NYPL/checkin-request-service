@@ -1,6 +1,15 @@
-language: php
+language:
+  - php
+  - node_js
 php:
 - 7.1
+node_js:
+- 6.10
+cache:
+  directories:
+  - node_modules
+install:
+- npm install
 script:
 - composer update
 - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
