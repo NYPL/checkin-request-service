@@ -7,7 +7,7 @@
     "pretest": "phplint src/*.php src/**/*.php src/**/**/*.php",
     "test-checkin": "node-lambda run -f config/var_local.env -j config/event_sources_local.json",
     "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/var_development.env -o arn:aws:iam::224280085904:role/lambda_basic_execution -b subnet-f4fe56af -g sg-1d544067 -a $AWS_ACCESS_KEY_ID_DEVELOPMENT -s $AWS_SECRET_ACCESS_KEY_DEVELOPMENT",
-    "deploy-production": "node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -b {subnets} -g {security-groups}"
+    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -o arn:aws:iam::224280085904:role/lambda_basic_execution -b subnet-f4fe56af -g sg-1d544067 -a $AWS_ACCESS_KEY_ID_PRODUCTION -s $AWS_SECRET_ACCESS_KEY_PRODUCTION"
   },
   "repository": {},
   "keywords": [],
