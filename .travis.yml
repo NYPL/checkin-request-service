@@ -8,3 +8,26 @@ after_success:
   - vendor/bin/coveralls -v
   - vendor/bin/phpcs -n --standard=PSR1,PSR2 src/
   - vendor/bin/phpcbf src/
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-production
+  on:
+    branch: master
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-qa
+  on:
+    branch: qa
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-development
+  on:
+    branch: add-ci-cd-from-travis
+after_deploy: echo 'Successfully executed deploy trigger for Checkin Request Service on AWS'
+env:
+  global:
+  - secure: MuJS6bEc+jLcp8UXD7x7IB7a7rwbzERW/KON2HDFztwBENLGBi+tRDe3RiDyqzSWgUn86S58RGgFRcJnYfAOhwtARaf3FJ+dGnFUn0vFq5NzH0InwfCbtznsSrbeG4H4G9nQHCqjdRBwqy4BxG8HvzEVnuQsYAiLRe2HaH42hIMANd3MBeGFBHFQJgeGkZs5xEHDxh12fhkFA8JS5hRnLpIiZTR0cIHDlCzO6O0PIQiUkvDZ558YePBJX9AzfV1xx3492uReTb5RmNo2mkKx67/9Ks6mLBfpUiOtbnR4IUKA8YDe7vxl4nx7y/DlZ75uuwlqRQEOaL9TMXpOARD91PU7mHjOUynR3/27Ii+H6K4jD7SlBuRdKrn1EbPCtFIzS7QW5satQ6p0nP0RfB5b9I7av6EJzAdtY1PO8pwk7glQI2epNgcBccuo9t/RApJJWzAP0flyS0OyqCa8ZImC90Tkiaf3FlDxQR7TTfX+i67PMe3soH3VVODHZKVqHXrabhrmjiifXQCZe1wRC5X/8ysDLP2Zco5P1weE6BT/LxFxc5j/1auQxi/QPPTsbqRDCqXv/IXULk2LJ46AslJNKgNiMRHUnMJCpO/D37qBWhy46GHsZzjf80D2v6YT0YqaVTmPUDkQJpGHfWtsMThmeSoIXf0IG/4bOfOrbloT8CM=
+  - secure: SGpiJG7peKBI5I6zOH4PxzXe/n00h1+EAFtpMa7LoUE+2nQ5S8vUijftE9L7iu3oYfWoAfLVv+2Q6iuEkB8uY8xeyop0s1cVt5xsHMVxisRf4HChuW2bwgInqH3Ks3a07r9m+FA/smRzw94SxyQJ1sGWSQ6EVkxi/oYt3SmngvQOai/EOHZZXqs56wTEdAcIKv0ikAz21pTTG/giek7X2hSCxFaJ1NYHKTBGvW9Mkt1GrRH5RCCbC5rEPaYyBWu06Q6oMAjEsqf8s8dWF06TbcntwyAR7nmb8ivmqDkd+ZGoAxVQ0D1dDUowWafGJcSBljAI4iRk6rBn2uUfWpgKxq1649lNZvqKszBKvr371IimgfBLgyamOOeLVyoArAqQJI3Wyz0RNm/IpS+BU1ccBOPISgAfp5cv2Lpdx63QsYk2aCmcWNzit7TBqwTvPM6sx0CbDhFYNYiKvdRZjKSkmqO3lwBgBxiuJE1stPNwtEcsgq6qEVCZvEIDmUHXDdGyPdAu23QYjAno2VdYO+cbBLBOKwnBcC84gabATYclLBV8AHq5ACVY2dynVGjDyAoiqKmvZTCo0y1hW9tQ6sK2DqIEaAEE6s470Umvn/l3qqstKpKlLLpCK0cACJOAIYDNnTIRzt4kgWAxHY5gt9jNPRhSMFQkR+pk8nkVOeWwP2w=
+  - secure: FIPSQ2KO/hBPCBx85C4Ak7cfOQBppZZExyJJYcpvHbbB326WNgs+XIBDxFAla2xjYZNU/5KyHIIV22hxOrXn8P+Et/Qg8RcT+QPWl1h1/85h5b/DeA3sQ4kc54D/TYiRPBEXJQHFK0w2I3sSdGL2eIjd0pitRlB3kqMoB3RPfvchp/Ks4bhVS02md3YkC5XiFsHyblDoBZuvZZuNO8YA0NQCledrbeW2ldcw4nxnMa27CQqVqUyvaVXTUSIYharGKtmRItfSZ/yH6wsU3W6k11Jnjyg61nax4W/uCQMu19cwGHonQaOvhQ8VCY3JrsF5yumpON6mMgzn5Jg00880jKKkv0fOioGEnZjPXlmcrVSHJ8SU9g+nBc37uZbZGMu2EgorN01sYcYyHub8BBDF+M04Jokwe+cI1KIrJZ22lEBm++vAzGiTxInPtbpHATsPqEVEzwp/O6OJNxyinLVAJppCYCTDYaw2Mlpy17sUbknrAfvMCXdFJj3WUJJJ1DihxsUhE2b7CAVw3LedIx8u4/jp2dz5gGtBYkgcrodlPpHYJ2iyeUfTMr6dfg/8Slr5zd+h+pFyvGz8o9rpYu7LcnjAnMvTuqzkFxRXNuZaAFjc8NFRBQ8FRKh6L5fh/yMB6TvGLGNlDnTKJ1kZ+ADiBcO0S5qrt56zpO3O/1xBReA=
+  
