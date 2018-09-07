@@ -1,6 +1,15 @@
-language: php
+language:
+  - php
+  - node_js
 php:
   - 7.1
+node_js:
+  - 6.10
+cache:
+  directories:
+    - node_modules
+install:
+  - npm install
 script:
   - composer update
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
@@ -8,3 +17,21 @@ after_success:
   - vendor/bin/coveralls -v
   - vendor/bin/phpcs -n --standard=PSR1,PSR2 src/
   - vendor/bin/phpcbf src/
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-production
+  on:
+    branch: master
+- provider: script
+  skip_cleanup: true
+  script: npm run deploy-development
+  on:
+    branch: development
+after_deploy: echo 'Successfully executed deploy trigger for Checkin Request Service
+  on AWS'
+env:
+  global:
+  - secure: DjOZJLMnAucjA0enco0BYibq0q0Y+jKP2cjKV94XrAZbi/EdkCSSyDnbUlZJCBT0agTph7mdih2n1x3zEkhNvkOwhVKp9XpdsfisUu4KrW6Qn3FK/RhWAphJwrWUjW7JLFd53VeXFfIgIpD4/begWpf5/CqKxixCDF0cm/LQwkF6zIf6xGLd3LqF0CYqsluUn1wTMOcGTQTQx3KWnAQIAbKXe+veQqbbYSs5U6uz4n5prVwwwkBmd+tTOivVzR2PY/8O29ZhegFNXo7h4brIT389ifJHFVuRwf7jMJeiHV9bYBJZG4Guitl9SK9VKxV9r+pcx/hOOAntuPC204C5h6jgBg0dTOS0rX2ctMWFuYumsCUrDJo/8qolczxbA0A5PmQSCYUeTiquFcsevtk2noGPYRF6s5C4hH8wkhU2n039Inr/3v4BzyCq1GanGS1EK1ZjbjIaqcoQ8VmlqdLVAc1uxFl/Pl4bHMhN8BVs0sFrmgbZk9WKz0FdpR7pL7l72xyr0+qnAFNl61sP72PYll91cXdcQhPggC85JTl4tpRksLmp80Qs+zbYxl7NMWM3w9zkIiiEZ0UNf1EA32aYY8RcGP7Pd8ej8GnbVvoU1m8HlfzDqPlFDmKxOePjwm9joPGsZVemv1HcisHC/UHqC/lpS0c3rHoTsxkJ+htFVvg=
+  - secure: MlSNZDJ8+pUugW+VsGhwDfqESrSh/zBYA/1EUETNT8QtFGFsh+gryM+m+lP6V9dtz5pLRvUPFz+qnje+mCG62gZC5u2BaPwT15zaKY9OYgosUkMAm/sfXOr368veuW4l3sg2MOXeJS0rk1bA6jvxLRRYQzMU0EI1dIKbTmfKk40s2gm58wPWK3mE6X6tO0EB8Ap5ROc5wXnVrCQjBv/aYbdU8DnwVyoROhdrd8Nx036D1Id7CRXseNActsUhDZMBzurwd0EdO5E0ExW0kP55f9kO3BnzBkCwE7+Je9H7L03IuGhtag6gcxcXj7CrtGnWN2sQgx8X4dygHLDDxi/Sr9bJdJjL/ctbKZEMibUeX1XgLpObR8BlYtrvagJ1kHd+/TxjrhWBVXU4ixq18GkraTcsYxhYmKz+lCXpNsGAmZLENP1aeivVE8TVKsqtjsoKpZJyE0Bh9i/JJLJh9VPFXAauZmFcUv2TgzoJoDM7PViLKrQgcWHPSDgL8ScjUem3Jf8+jms/q4TQj1V+GkwktNnvRdfd9G6qKqczuQHfK2eJ+/teSm+/O2FxdH7V6b4wgJMXpE+aWB/kkqLP1n2MqvfczLMsEXz2/xX6kfDgpWew9UMNyVnBXlnPrDHLe/jTc+V23RytgqRQPaqNjgAeDv9jTmP2Qi37KLunaB9MPAs=
+  - secure: jNwnEQcBD3MRcvcLzCSO5woQZk/Lv5HlhtEoxg33wLHjoQgMHUbzlxjdJmVqn8JnftNZqVJNEJFp8MbiLfweYpDqHQg/j+nVCFSjuBlD01mo31L3wf+NDNcLtB+HKQ15ahC+y4h5lfsBs7Y9r8BFZwFQILovCp2AVpxp5ALNauSNAoqpzIE48avrcP8fy3ZYqciVIH/QU6dc6MqB4bgAFboixinlgexRhacqalBXBuYFChW09RwthSlY4egFI7PomTTIQhRPyDCl5BmDvD4tbWTgCHhuTYur8hHcSVi/dS+2xssiLw34OmC91yTjwcqWomQ2YdTmaLEIBlKmw+UJQQKc8OSNMF/vVK2aOwLbqFvgm4PqXRIF+r1syk+3a/aRey58UzsMtyQHaqrxi2Wk5KFVeqvp53igDNon7rZ6TOfK9i+PQtV7rwj3/MuR89CAVIomlKg+bs7e34Bkl5bJb1S9IDKEnbiU2ka/cGWHxX/E+T1uPaKxiXfwLQLoBby7f3RywOCB4nCr/JY6L3jPEAt65W5nlvNCzg2ZjEmy4ao/CgqPpmj8HPK+H4u7mL5OnecBp4hjwpznu3y9/m20XUzUHl612hBwS7JWDtCWVJdL5okiUbA1aLSNA/1DnGVSXByY7Ygk19YLiT66t7nwAPNHoeGreilJA4+QZjVHDNA=
