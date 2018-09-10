@@ -132,3 +132,8 @@ To deploy to an environment, run the corresponding command. For example:
 ~~~~
 npm run deploy-development
 ~~~~
+
+or simply git push the `development` or `master` branch. The branch will be deployed respectively with Travis.
+
+development => CheckinRequestService-development (nypl-sandbox)
+master => CheckinRequestService-production(nypl-digital-dev)
