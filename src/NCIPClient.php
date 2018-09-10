@@ -133,7 +133,6 @@ class NCIPClient
         self::initializeClient();
 
         APILogger::addDebug('message', [$ncipMessage->messageToString()]);
-        APILogger::addDebug('client config', [Config::get('NCIP_URL', null, true)]);
 
         $response = self::getClient()->post(
             '',
@@ -141,8 +140,6 @@ class NCIPClient
                 'body' => $ncipMessage->messageToString()
             ]
         );
-
-        APILogger::addDebug('ncipResponse before parse', [(string)$response->getBody()]);
 
         self::setResponse(new \SimpleXMLElement((string)$response->getBody()));
 
