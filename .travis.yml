@@ -17,22 +17,15 @@ after_success:
   - vendor/bin/coveralls -v
   - vendor/bin/phpcs -n --standard=PSR1,PSR2 src/
   - vendor/bin/phpcbf src/
+  - ENVIRONMENT_NAME=$TRAVIS_BRANCH
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ENVIRONMENT_NAME=production; fi
 deploy:
-- provider: script
-  skip_cleanup: true
-  script: npm run deploy-production
-  on:
-    branch: master
-- provider: script
-  skip_cleanup: true
-  script: npm run deploy-qa
-  on:
-    branch: qa
-- provider: script
-  skip_cleanup: true
-  script: npm run deploy-development
-  on:
-    branch: development
+  - provider: script
+    skip_cleanup: true
+    script: "./scripts/travis-deploy.sh $ENVIRONMENT_NAME"
+    on:
+      all_branches: true
+      condition: "$ENVIRONMENT_NAME =~ ^(development|qa|production)$"
 after_deploy: echo 'Successfully executed deploy trigger for Checkin Request Service
   on AWS'
 env:
