@@ -213,6 +213,8 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
         $requiredFields = explode(',', self::REQUIRED_FIELDS);
 
         foreach ($requiredFields as $field) {
+            APILogger::addDebug('get request field data', $this->$field);
+
             if (!isset($this->$field)) {
                 APILogger::addError(
                     'CheckinRequest object not instantiated. Bad request data sent.',
