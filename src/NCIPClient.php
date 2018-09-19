@@ -116,7 +116,7 @@ class NCIPClient
     public static function initializeClient()
     {
         self::setClient(new Client([
-            'base_uri' => Config::get('NCIP_URL', null, true),
+            'base_uri' => Config::get('NCIP_URL'),
             'timeout' => self::CLIENT_TIMEOUT,
             'headers' => [
                 'Content-Type' => 'application/xml'
