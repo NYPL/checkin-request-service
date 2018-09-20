@@ -66,8 +66,9 @@ the proper AWS Lambda VPC, security group, and role.
  
 ~~~~
 "scripts": {
-    "deploy-qa": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_qa.json -o {AWS Role} --profile {personal AWS account credentials for nypl-digital-dev}",
-    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -o {AWS Role} --profile {personal AWS account credentials for nypl-digital-dev}"
+    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/development.env -S config/event_sources_qa.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-sandbox}",
+    "deploy-qa": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_qa.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-digital-dev}",
+    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-digital-dev}"
 },
 ~~~~
 

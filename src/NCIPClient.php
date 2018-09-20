@@ -141,8 +141,6 @@ class NCIPClient
             ]
         );
 
-        APILogger::addDebug('ncipResponse before parse', [$response->getBody()]);
-
         self::setResponse(new \SimpleXMLElement((string)$response->getBody()));
 
         APILogger::addDebug('ncipResponse', [self::getResponse()]);
