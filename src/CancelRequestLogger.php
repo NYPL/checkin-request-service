@@ -33,34 +33,34 @@ class CancelRequestLogger extends APILogger
     {
         $logger = new Logger('NYPL');
 
-        // if (getenv('SLACK_TOKEN') !== false) {
-        //     self::addSlackLogging($logger);
-        // }
+        if (getenv('SLACK_TOKEN') != false) {
+            self::addSlackLogging($logger);
+        }
 
         self::addJsonLogging($logger);
 
         self::setLogger($logger);
     }
 
-    // /**
-    //  * @param Logger $logger
-    //  * @throws APIException|MissingExtensionException
-    //  */
-    // protected static function addSlackLogging(Logger $logger)
-    // {
-    //     if (Config::isInitialized() && $slackToken = Config::get('SLACK_TOKEN', null, true)) {
-    //         $handler = new SlackHandler(
-    //             $slackToken,
-    //             Config::get('SLACK_CHANNEL_ALT'),
-    //             Config::get('SLACK_USERNAME'),
-    //             true,
-    //             null,
-    //             Config::get('SLACK_LOGGING_LEVEL', self::DEFAULT_SLACK_LOGGING_LEVEL)
-    //         );
+    /**
+     * @param Logger $logger
+     * @throws APIException|MissingExtensionException
+     */
+    protected static function addSlackLogging(Logger $logger)
+    {
+        if (Config::isInitialized() && $slackToken = Config::get('SLACK_TOKEN', null, true)) {
+            $handler = new SlackHandler(
+                $slackToken,
+                Config::get('SLACK_CHANNEL_ALT'),
+                Config::get('SLACK_USERNAME'),
+                true,
+                null,
+                Config::get('SLACK_LOGGING_LEVEL', self::DEFAULT_SLACK_LOGGING_LEVEL)
+            );
 
-    //         $logger->pushHandler($handler);
-    //     }
-    // }
+            $logger->pushHandler($handler);
+        }
+    }
 
     /**
      * @param Logger $logger
