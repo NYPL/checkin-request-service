@@ -33,6 +33,8 @@ class CancelRequestLogger extends APILogger
     {
         $logger = new Logger('NYPL');
 
+        APILogger::addDebug('SLACK_TOKEN is', getenv('SLACK_TOKEN'));
+
         if (getenv('SLACK_TOKEN')) {
             self::addSlackLogging($logger);
         }
