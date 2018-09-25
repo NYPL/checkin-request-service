@@ -66,8 +66,9 @@ the proper AWS Lambda VPC, security group, and role.
  
 ~~~~
 "scripts": {
-    "deploy-qa": "node-lambda deploy -e qa -f config/var_qa.env -S config/event_sources_qa.json -b {subnets} -g {security-groups}",
-    "deploy-production": "node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -b {subnets} -g {security-groups}",
+    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/var_development.env -S config/event_sources_development.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-sandbox}",
+    "deploy-qa": "./node_modules/.bin/node-lambda deploy -e qa -f config/var_qa.env -S config/event_sources_qa.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-digital-dev}",
+    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-digital-dev}"
 },
 ~~~~
 
@@ -136,4 +137,5 @@ npm run deploy-development
 or simply git push the `development` or `master` branch. The branch will be deployed respectively with Travis.
 
 development => CheckinRequestService-development (nypl-sandbox)
-master => CheckinRequestService-production(nypl-digital-dev)
+qa => CheckinRequestService-qa (nypl-digital-dev)
+master => CheckinRequestService-production (nypl-digital-dev)

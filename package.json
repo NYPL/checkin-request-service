@@ -1,13 +1,14 @@
 {
   "name": "CheckinRequestService",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Lambda for the NYPL Checkin Request Service",
   "main": "index.js",
   "scripts": {
     "pretest": "phplint src/*.php src/**/*.php src/**/**/*.php",
     "test-checkin": "node-lambda run -f config/var_local.env -j config/event_sources_local.json",
-    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/var_development.env -o arn:aws:iam::224280085904:role/lambda_basic_execution -b subnet-f4fe56af -g sg-1d544067 -a $AWS_ACCESS_KEY_ID_DEVELOPMENT -s $AWS_SECRET_ACCESS_KEY_DEVELOPMENT",
-    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -o arn:aws:iam::946183545209:role/lambda-full-access -b subnet-5deecd15,subnet-59bcdd03 -g sg-116eeb60 -a $AWS_ACCESS_KEY_ID_PRODUCTION -s $AWS_SECRET_ACCESS_KEY_PRODUCTION"
+    "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/var_development.env -S config/event_sources_development.json -o arn:aws:iam::224280085904:role/lambda_basic_execution -b subnet-f4fe56af -g sg-1d544067 --profile nypl-sandbox",
+    "deploy-qa": "./node_modules/.bin/node-lambda deploy -e qa -f config/var_qa.env -S config/event_sources_qa.json -o arn:aws:iam::946183545209:role/lambda-full-access -b subnet-f35de0a9,subnet-21a3b244 -g sg-aa74f1db --profile nypl-digital-dev",
+    "deploy-production": "./node_modules/.bin/node-lambda deploy -e production -f config/var_production.env -S config/event_sources_production.json -o arn:aws:iam::946183545209:role/lambda-full-access -b subnet-5deecd15,subnet-59bcdd03 -g sg-116eeb60 --profile nypl-digital-dev"
   },
   "repository": {},
   "keywords": [],
