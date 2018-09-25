@@ -35,7 +35,6 @@ class CancelRequestLogger extends APILogger
 
         self::addSlackLogging($logger);
         self::addJsonLogging($logger);
-
         self::setLogger($logger);
     }
 
