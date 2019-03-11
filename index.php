@@ -17,7 +17,7 @@ try {
 
     $service->get('/docs/checkin-requests', Swagger::class);
 
-    $service->get('/docs/checkin-requests-sync', Swagger::class)
+    $service->get('/docs/checkin-requests-sync', Swagger::class);
 
     $service->post('/api/v0.1/checkin-requests', CheckinRequestController::class . ':createCheckinRequest');
 
