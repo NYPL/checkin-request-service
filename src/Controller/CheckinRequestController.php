@@ -67,7 +67,7 @@ class CheckinRequestController extends ServiceController
    * @return Response
    */
   public function createCheckinRequestSync() {
-    return $this->createCheckinRequest()
+    return $this->createCheckinRequest();
   }
 
   public function createCheckinRequest()
