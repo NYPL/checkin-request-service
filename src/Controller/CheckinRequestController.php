@@ -69,8 +69,6 @@ class CheckinRequestController extends ServiceController
   public function createCheckinRequestSync() {
     return $this->createCheckinRequest();
   }
-
-  public function createCheckinRequest()
     /**
      * @SWG\Post(
      *     path="/v0.1/checkin-requests",
