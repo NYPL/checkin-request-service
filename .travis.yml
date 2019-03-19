@@ -11,7 +11,7 @@ cache:
 install:
   - npm install
 script:
-  - composer update
+  - composer install
   - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
 after_success:
   - vendor/bin/coveralls -v
