@@ -175,10 +175,8 @@ class CheckinRequestController extends ServiceController
         $checkinRequest->create();
 
         // Initiate a job for non-cancellation requests.
-        if (is_null($checkinRequest->getJobId()) && $this->isUseJobService()) {
-            $checkinRequest->setCheckinJobId(JobService::generateJobId($this->isUseJobService()));
-            // Set jobId for proper responses for non-cancellation requests.
-            $checkinRequest->setJobId($checkinRequest->getCheckinJobId());
+        if (is_null($checkinRequest->getCancelRequestId()) && $this->isUseJobService()) {
+            $checkinRequest->setCheckinJobId($checkoutRequest->getJobId()));
             APILogger::addDebug(
                 'Initiating job via Job Service API ReCAP checkin request.',
                 ['checkinJobID' => $checkinRequest->getCheckinJobId()]
