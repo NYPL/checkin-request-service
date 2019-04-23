@@ -3,4 +3,4 @@ config/var_app
 vendor/
 node_modules
 old-vendor/
-var_local.env
+config/var_local.env
