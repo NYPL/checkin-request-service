@@ -14,6 +14,7 @@
   "keywords": [],
   "dependencies": {},
   "devDependencies": {
+    "lib-for-node10-wrapped-php7-lambda-layer": "github:NYPL/lib-for-node10-wrapped-php7-lambda-layer#main",
     "node-lambda": "0.12.0"
   }
 }
