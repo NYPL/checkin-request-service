@@ -100,7 +100,7 @@ sam local invoke --profile nypl-digital-dev -t sam.local.yml --docker-network ho
 
 To connect to the local db:
 ```
-docker exec -it checkin-service-postgres-db psql -U postgres checkin_service
+docker exec -it checkin-service-postgres-db psql -U postgres checkin_requests
 ```
 
 ### Process a Lambda Event

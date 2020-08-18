@@ -14,7 +14,7 @@ Resources:
       Environment:
         Variables:
           API_BASE_URL: https://qa-platform.nypl.org/api/v0.1/
-          DB_CONNECT_STRING: pgsql:host=localhost;dbname=checkin_requests
+          DB_CONNECT_STRING: pgsql:host=localhost;dbname=checkin_requests;port=25432
           DB_PASSWORD: AQECAHh7ea2tyZ6phZgT4B9BDKwguhlFtRC6hgt+7HbmeFsrsgAAAHkwdwYJKoZIhvcNAQcGoGowaAIBADBjBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDPGaENQWVqPt6yh1uAIBEIA2X1sJ9rt9I2bBysC4UAKitPzNN7OUBGKf2IF45D9xjQVRAYt6LjpSgcwMwVuj8kQN1Eebc9sd
           DB_USERNAME: postgres
           DEFAULT_LOGGING_LEVEL: debug
