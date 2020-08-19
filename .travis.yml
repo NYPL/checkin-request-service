@@ -17,6 +17,7 @@ after_success:
   - vendor/bin/phpcbf src/
   - ENVIRONMENT_NAME=$TRAVIS_BRANCH
   - if [ "$TRAVIS_BRANCH" == "master" ]; then ENVIRONMENT_NAME=production; fi
+before_deploy: nvm install
 deploy:
   - provider: script
     skip_cleanup: true
