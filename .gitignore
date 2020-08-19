@@ -2,3 +2,4 @@ composer.phar
 config/var_app
 vendor/
 node_modules
+config/var_local.env

@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'CheckinRequestService'
+
+Resources:
+  CheckinRequestService:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs10.x
+      Timeout: 30
+      Layers:
+      - !Ref LibForPhp7Layer
+      Environment:
+        Variables:
+          API_BASE_URL: https://qa-platform.nypl.org/api/v0.1/
+          DB_CONNECT_STRING: pgsql:host=localhost;dbname=checkin_requests;port=25432
+          DB_PASSWORD: AQECAHh7ea2tyZ6phZgT4B9BDKwguhlFtRC6hgt+7HbmeFsrsgAAAHkwdwYJKoZIhvcNAQcGoGowaAIBADBjBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDPGaENQWVqPt6yh1uAIBEIA2X1sJ9rt9I2bBysC4UAKitPzNN7OUBGKf2IF45D9xjQVRAYt6LjpSgcwMwVuj8kQN1Eebc9sd
+          DB_USERNAME: postgres
+          DEFAULT_LOGGING_LEVEL: debug
+          IDENTITY_HEADER: X-NYPL-Identity
+          JOB_SERVICE_URL: https://qa-platform.nypl.org/api/v0.1/jobs
+          NCIP_URL: AQECAHh7ea2tyZ6phZgT4B9BDKwguhlFtRC6hgt+7HbmeFsrsgAAAJowgZcGCSqGSIb3DQEHBqCBiTCBhgIBADCBgAYJKoZIhvcNAQcBMB4GCWCGSAFlAwQBLjARBAydD8EKFnoYquS7udMCARCAU4bgcPpxw4Jw+5zVNLdFUM8db3eHbyJXcz3WphVnyTWhCFQ/a5Rdf5wUzzLU5fQKlFX5pEmcsjq87sS47rcnky/RdgI0w8OZmFRFDlmEL73wCC6a
+          SCHEMA_BASE_URL: https://qa-platform.nypl.org/api/v0.1/current-schemas
+          SWAGGER_GENERAL_URL: https://qa-platformdocs.nypl.org/docs/checkin-requests
+          SWAGGER_HOST: qa-platformdocs.nypl.org
+          SWAGGER_SCHEME: https
+          TIME_ZONE: America/New_York
+          USE_JOB_SERVICE: 1
+      Events:
+        ApiGetHoldRequestsPath:
+          Type: Api
+          Properties:
+            Path: "/api/v0.1/checkin-requests"
+            Method: GET
+        DocsPath:
+          Type: Api
+          Properties:
+            Path: "/docs/checkin-requests"
+            Method: GET
+  LibForPhp7Layer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: lib-for-node10-wrapped-php7
+      Description:
+      ContentUri: node_modules/lib-for-node10-wrapped-php7-lambda-layer/
+      CompatibleRuntimes:
+      - nodejs10
+      LicenseInfo: 'MIT'
+      RetentionPolicy: Retain

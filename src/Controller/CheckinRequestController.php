@@ -22,6 +22,53 @@ use Slim\Http\Response;
  */
 class CheckinRequestController extends ServiceController
 {
+  /**
+   * @SWG\Post(
+   *     path="/v0.1/checkin-requests-sync",
+   *     summary="Process a checkin request",
+   *     tags={"checkin-requests-sync"},
+   *     operationId="processCheckinRequest",
+   *     consumes={"application/json"},
+   *     produces={"application/json"},
+   *     @SWG\Parameter(
+   *         name="NewCheckinRequest",
+   *         in="body",
+   *         description="Request object based on the included data model",
+   *         required=true,
+   *         @SWG\Schema(ref="#/definitions/NewCheckinRequest")
+   *     ),
+   *     @SWG\Response(
+   *         response=200,
+   *         description="Successful operation",
+   *         @SWG\Schema(ref="#/definitions/CheckinRequestResponse")
+   *     ),
+   *     @SWG\Response(
+   *         response="401",
+   *         description="Unauthorized"
+   *     ),
+   *     @SWG\Response(
+   *         response="404",
+   *         description="Not found",
+   *         @SWG\Schema(ref="#/definitions/CheckinRequestErrorResponse")
+   *     ),
+   *     @SWG\Response(
+   *         response="500",
+   *         description="Generic server error",
+   *         @SWG\Schema(ref="#/definitions/CheckinRequestErrorResponse")
+   *     ),
+   *     security={
+   *         {
+   *             "api_auth": {"openid offline_access api write:hold_request readwrite:hold_request"}
+   *         }
+   *     }
+   * )
+   *
+   * @throws APIException
+   * @return Response
+   */
+  public function createCheckinRequestSync() {
+    return $this->createCheckinRequest();
+  }
     /**
      * @SWG\Post(
      *     path="/v0.1/checkin-requests",
@@ -128,9 +175,11 @@ class CheckinRequestController extends ServiceController
         $checkinRequest->create();
 
         // Initiate a job for non-cancellation requests.
-        if (is_null($checkinRequest->getJobId()) && $this->isUseJobService()) {
+        if (is_null($checkinRequest->getCancelRequestId()) && $this->isUseJobService()) {
+            // Create a jobId and assign it to special checkinJobId property
+            // (to signal that job should not be completed later in execution)
             $checkinRequest->setCheckinJobId(JobService::generateJobId($this->isUseJobService()));
-            // Set jobId for proper responses for non-cancellation requests.
+            // Copy jobId to jobId property (which is saved in db):
             $checkinRequest->setJobId($checkinRequest->getCheckinJobId());
             APILogger::addDebug(
                 'Initiating job via Job Service API ReCAP checkin request.',
@@ -165,6 +214,8 @@ class CheckinRequestController extends ServiceController
         );
 
         // Finish job processing for non-cancellation requests.
+        // Note: Unclear why we don't just check for null
+        // $checkoutRequest->getCancelRequestId() here:
         if (!is_null($checkinRequest->getCheckinJobId()) && $this->isUseJobService()) {
             APILogger::addDebug('Updating checkin job.', ['checkinJobID' => $checkinRequest->getCheckinJobId()]);
             JobService::finishJob($checkinRequest);
