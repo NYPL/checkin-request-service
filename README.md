@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/NYPL/checkin-request-service/badge.svg?branch=master)](https://coveralls.io/github/NYPL/checkin-request-service?branch=master)
 
 The Checkin Request Service receives a request from an API service or consumer
-and processes the implied action for a given hold request. 
+and processes the implied action for a given hold request.
 
 Once the service validates the request and saves it to its database instance,
 it sends a new request via NCIP to the Sierra ILS, processes the response
@@ -16,22 +16,22 @@ service.
 
 This service works in tandem with the [NYPL Checkout Request Service](https://github.com/NYPL/checkout-request-service). The two services now are consumed by [Cancel Request Consumer](https://github.com/NYPL/cancel-request-consumer) for canceling a hold on a ReCap item in Sierra. The way to perform the cancelling is to check out and check in the item right away.
 
-This package is intended to be used as a Lambda-based Node.js/PHP Patron Service using the 
+This package is intended to be used as a Lambda-based Node.js/PHP Patron Service using the
 [NYPL PHP Microservice Starter](https://github.com/NYPL/php-microservice-starter).
 
-This package adheres to [PSR-1](http://www.php-fig.org/psr/psr-1/), 
-[PSR-2](http://www.php-fig.org/psr/psr-2/), and [PSR-4](http://www.php-fig.org/psr/psr-4/) 
+This package adheres to [PSR-1](http://www.php-fig.org/psr/psr-1/),
+[PSR-2](http://www.php-fig.org/psr/psr-2/), and [PSR-4](http://www.php-fig.org/psr/psr-4/)
 (using the [Composer](https://getcomposer.org/) autoloader).
 
 ## Requirements
 
-* Node.js >=6.0
-* PHP >=7.0 
+* Node.js >=10.17.0
+* PHP >=7.0
   * [pdo_pdgsql](http://php.net/manual/en/ref.pdo-pgsql.php)
 
 Homebrew is highly recommended for PHP:
   * `brew install php71`
-  
+
 
 ## Installation
 
@@ -53,9 +53,9 @@ Various files are used to configure and deploy the Lambda.
 
 `.env` is used *locally* for two purposes:
 
-1. By `node-lambda` for deploying to and configuring Lambda in *all* environments. 
-   * You should use this file to configure the common settings for the Lambda 
-   (e.g. timeout, Node version). 
+1. By `node-lambda` for deploying to and configuring Lambda in *all* environments.
+   * You should use this file to configure the common settings for the Lambda
+   (e.g. timeout, Node version).
 2. To set local environment variables so the Lambda can be run and tested in a local environment.
    These parameters are ultimately set by the [var environment files](#var_environment) when the Lambda is deployed.
 
@@ -63,7 +63,7 @@ Various files are used to configure and deploy the Lambda.
 
 Configures `npm run` commands for each environment for deployment and testing. Deployment commands may also set
 the proper AWS Lambda VPC, security group, and role.
- 
+
 ~~~~
 "scripts": {
     "deploy-development": "./node_modules/.bin/node-lambda deploy -e development -f config/var_development.env -S config/event_sources_development.json -o {AWS Role} -b {subnets} -g {security-groups} --profile {personal AWS account credentials for nypl-sandbox}",
