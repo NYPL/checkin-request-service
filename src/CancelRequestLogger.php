@@ -91,10 +91,10 @@ class CancelRequestLogger extends APILogger
     public static function addLog($httpCode = 0, $error = '', array $context = [])
     {
         if ($httpCode < 500) {
-            return self::addInfo($error, $context);
+            return self::info($error, $context);
         }
 
-        return self::addError($error, $context);
+        return self::error($error, $context);
     }
 
     /**
@@ -159,7 +159,7 @@ class CancelRequestLogger extends APILogger
      */
     public static function addInfo($error = '', $context = [])
     {
-        self::getLogger()->addInfo(self::formatMessage($error), self::formatContext($context));
+        self::getLogger()->info(self::formatMessage($error), self::formatContext($context));
 
         return true;
     }
@@ -172,7 +172,7 @@ class CancelRequestLogger extends APILogger
      */
     public static function addError($error = '', $context = [])
     {
-        self::getLogger()->addError(self::formatMessage($error), self::formatContext($context));
+        self::getLogger()->error(self::formatMessage($error), self::formatContext($context));
 
         return true;
     }
@@ -185,7 +185,7 @@ class CancelRequestLogger extends APILogger
      */
     public static function addDebug($error = '', $context = [])
     {
-        self::getLogger()->addDebug(self::formatMessage($error), self::formatContext($context));
+        self::getLogger()->debug(self::formatMessage($error), self::formatContext($context));
 
         return true;
     }
@@ -198,7 +198,7 @@ class CancelRequestLogger extends APILogger
      */
     public static function addNotice($error = '', $context = [])
     {
-        self::getLogger()->addNotice(self::formatMessage($error), self::formatContext($context));
+        self::getLogger()->notice(self::formatMessage($error), self::formatContext($context));
 
         return true;
     }
