@@ -10,7 +10,7 @@ class CheckinRequestControllerTest extends TestCase
 {
     public $fakeCheckinController;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         MockConfig::initialize(__DIR__ . '/../../');

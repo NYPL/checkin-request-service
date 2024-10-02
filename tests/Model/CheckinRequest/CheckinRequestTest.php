@@ -9,7 +9,7 @@ class CheckinRequestTest extends TestCase
     public $checkinRequest;
     public $schema;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checkinRequest = new CheckinRequest();
         $this->schema = $this->checkinRequest->getSchema();
