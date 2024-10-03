@@ -33,7 +33,7 @@ class CheckinRequestTest extends TestCase
         $fields = $this->schema['fields'];
 
         foreach ($fields as $field) {
-            self::assertClassHasAttribute($field['name'], 'NYPL\Services\Model\CheckinRequest\CheckinRequest');
+            self::assertObjectHasProperty($field['name'], $this->checkinRequest);
         }
     }
 
