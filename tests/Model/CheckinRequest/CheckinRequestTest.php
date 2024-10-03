@@ -62,6 +62,8 @@ class CheckinRequestTest extends TestCase
      */
     public function testIfInvalidPostDataThrowsException()
     {
+        $this->expectException('\NYPL\Starter\APIException');
+
         $this->checkinRequest->setJobId('abcdefg');
 
         $this->checkinRequest->validatePostData();
