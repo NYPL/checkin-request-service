@@ -2,6 +2,8 @@
 namespace NYPL\Services;
 
 use NYPL\Starter\DefaultContainer;
+use Aura\Di\Injection\InjectionFactory;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class ServiceContainer
@@ -15,7 +17,7 @@ class ServiceContainer extends DefaultContainer
      */
     public function __construct(
         InjectionFactory $injectionFactory,
-        ContainerInterface $delegateContainer)
+        ContainerInterface $delegateContainer = null)
     {
         parent::__construct($injectionFactory,  $delegateContainer);
         $this["settings"]["displayErrorDetails"] = true;
