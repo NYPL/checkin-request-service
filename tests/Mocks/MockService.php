@@ -2,6 +2,7 @@
 namespace NYPL\Services\Test\Mocks;
 
 use NYPL\Services\ServiceContainer;
+use NYPL\Starter\Service;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -48,7 +49,7 @@ class MockService
      */
     public static function setMockContainer()
     {
-        self::$mockContainer = new ServiceContainer();
+        self::$mockContainer = new Service();
         $params = [
             'X-NYPL-Identity' =>
                 '{"token":"blah","identity":{"sub":null,"scope":"openid offline_access api read:hold_request"}}'
