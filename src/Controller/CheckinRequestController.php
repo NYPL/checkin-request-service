@@ -14,6 +14,7 @@ use NYPL\Starter\APILogger;
 use NYPL\Starter\Filter;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use GuzzleHttp\Psr7\ServerRequest;
 
 /**
  * Class CheckinRequestController
@@ -261,7 +262,7 @@ class CheckinRequestController extends ServiceController
      * @param Request    $request
      * @return \Slim\Http\Response
      */
-    protected function processException($errorType, $errorMessage, \Exception $exception, Request $request)
+    protected function processException($errorType, $errorMessage, \Exception $exception, ServerRequest $request)
     {
         $statusCode = 500;
         if ($exception instanceof APIException) {
