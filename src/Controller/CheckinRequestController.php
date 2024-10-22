@@ -294,6 +294,6 @@ class CheckinRequestController extends ServiceController
             $exception
         );
 
-        return $this->getResponse()->withJson($errorResp)->withStatus($statusCode);
+        return $this->getJsonResponse($errorResp)->withStatus($statusCode);
     }
 }
