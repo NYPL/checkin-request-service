@@ -1,0 +1,17 @@
+FROM webdevops/php-nginx:8.3
+
+ADD config/nginx/default.conf /etc/nginx/conf.d
+
+WORKDIR /var/www/html
+ENV SERVER_ENV local
+ENV WEB_DOCUMENT_ROOT /var/www/html
+
+RUN apt-get update \
+    && apt-get install -y procps \
+    && pecl install xdebug
+
+EXPOSE 80
+
+COPY ./ $WORKDIR
+
+CMD ["/bin/sh", "-c", "scripts/app_init_local.sh && supervisord"]
