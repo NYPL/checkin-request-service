@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @SWG\Tag(
+ * @OA\Tag(
  *   name="checkin-requests",
  *   description="Checkin Request API"
  * )

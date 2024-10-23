@@ -10,7 +10,7 @@ use NYPL\Starter\Model\ModelTrait\DBReadTrait;
 use NYPL\Starter\Model\ModelTrait\DBUpdateTrait;
 
 /**
- * @SWG\Definition(title="CheckinRequest", type="object")
+ * @OA\Definition(title="CheckinRequest", type="object")
  *
  * @package NYPL\Services\Model\CheckinRequest
  */
@@ -21,13 +21,13 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
     const REQUIRED_FIELDS = 'itemBarcode';
 
     /**
-     * @SWG\Property(example="229")
+     * @OA\Property(example="229")
      * @var int
      */
     public $id;
 
     /**
-     * @SWG\Property(example=false)
+     * @OA\Property(example=false)
      * @var bool
      */
     public $success = false;
@@ -38,13 +38,13 @@ class CheckinRequest extends NewCheckinRequest implements ReadInterface
     public $processed = true;
 
     /**
-     * @SWG\Property(example="2016-01-07T02:32:51Z", type="string")
+     * @OA\Property(example="2016-01-07T02:32:51Z", type="string")
      * @var LocalDateTime
      */
     public $createdDate;
 
     /**
-     * @SWG\Property(example="2016-01-07T02:32:51Z", type="string")
+     * @OA\Property(example="2016-01-07T02:32:51Z", type="string")
      * @var LocalDateTime
      */
     public $updatedDate;
