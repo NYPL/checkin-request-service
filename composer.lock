@@ -1364,7 +1364,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/NYPL/php-microservice-starter.git",
-                "reference": "1b28a165449d7cdfc30a8610d4192bbcf2d8f831"
+                "reference": "b803557e4e433a93ea555523309e599c7b2efd0a"
             },
             "dist": {
                 "type": "zip",
