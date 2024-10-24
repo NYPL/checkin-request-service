@@ -22,9 +22,8 @@ class CheckinRequestControllerTest extends TestCase
             public $container;
             public $cacheSeconds;
 
-            public function __construct(\Slim\Container $container, $cacheSeconds)
+            public function __construct(\Aura\Di\Container $container, $cacheSeconds)
             {
-                $this->setUseJobService(1);
                 parent::__construct($container, $cacheSeconds);
             }
 
