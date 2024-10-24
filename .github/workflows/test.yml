@@ -10,6 +10,8 @@ jobs:
             - uses: php-actions/composer@v6
 
             - uses: php-actions/phpunit@v3
+              env:
+                XDEBUG_MODE: coverage
               with:
                 configuration: phpunit.xml
                 php_version: 8.3
