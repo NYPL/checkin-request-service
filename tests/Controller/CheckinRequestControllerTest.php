@@ -45,7 +45,7 @@ class CheckinRequestControllerTest extends TestCase
 
         $response = $controller->createCheckinRequest();
 
-        self::assertInstanceOf('Slim\Http\Response', $response);
+        self::assertInstanceOf('GuzzleHttp\Psr7\Response', $response);
     }
 
     /**
