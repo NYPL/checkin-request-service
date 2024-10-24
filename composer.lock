@@ -1368,8 +1368,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NYPL/php-microservice-starter/zipball/1b28a165449d7cdfc30a8610d4192bbcf2d8f831",
-                "reference": "1b28a165449d7cdfc30a8610d4192bbcf2d8f831",
+                "url": "https://api.github.com/repos/NYPL/php-microservice-starter/zipball/2ebe48650717c90f34c36b1590146a7f64c8d048",
+                "reference": "2ebe48650717c90f34c36b1590146a7f64c8d048",
                 "shasum": ""
             },
             "require": {
