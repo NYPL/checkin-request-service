@@ -1,6 +1,6 @@
 <?php
 /**
- * @SWG\SecurityScheme(
+ * @OA\SecurityScheme(
  *   securityDefinition="api_auth",
  *   type="oauth2",
  *   authorizationUrl="http://isso.nypl.org/oauth/authorize",

@@ -9,7 +9,7 @@ class CheckinRequestTest extends TestCase
     public $checkinRequest;
     public $schema;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->checkinRequest = new CheckinRequest();
         $this->schema = $this->checkinRequest->getSchema();
@@ -33,7 +33,7 @@ class CheckinRequestTest extends TestCase
         $fields = $this->schema['fields'];
 
         foreach ($fields as $field) {
-            self::assertClassHasAttribute($field['name'], 'NYPL\Services\Model\CheckinRequest\CheckinRequest');
+            self::assertObjectHasProperty($field['name'], $this->checkinRequest);
         }
     }
 
@@ -62,6 +62,8 @@ class CheckinRequestTest extends TestCase
      */
     public function testIfInvalidPostDataThrowsException()
     {
+        $this->expectException('\NYPL\Starter\APIException');
+
         $this->checkinRequest->setJobId('abcdefg');
 
         $this->checkinRequest->validatePostData();

@@ -14,6 +14,7 @@ use NYPL\Starter\APILogger;
 use NYPL\Starter\Filter;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use GuzzleHttp\Psr7\ServerRequest;
 
 /**
  * Class CheckinRequestController
@@ -23,38 +24,38 @@ use Slim\Http\Response;
 class CheckinRequestController extends ServiceController
 {
   /**
-   * @SWG\Post(
+   * @OA\Post(
    *     path="/v0.1/checkin-requests-sync",
    *     summary="Process a checkin request",
    *     tags={"checkin-requests-sync"},
    *     operationId="processCheckinRequest",
    *     consumes={"application/json"},
    *     produces={"application/json"},
-   *     @SWG\Parameter(
+   *     @OA\Parameter(
    *         name="NewCheckinRequest",
    *         in="body",
    *         description="Request object based on the included data model",
    *         required=true,
-   *         @SWG\Schema(ref="#/definitions/NewCheckinRequest")
+   *         @OA\Schema(ref="#/definitions/NewCheckinRequest")
    *     ),
-   *     @SWG\Response(
+   *     @OA\Response(
    *         response=200,
    *         description="Successful operation",
-   *         @SWG\Schema(ref="#/definitions/CheckinRequestResponse")
+   *         @OA\Schema(ref="#/definitions/CheckinRequestResponse")
    *     ),
-   *     @SWG\Response(
+   *     @OA\Response(
    *         response="401",
    *         description="Unauthorized"
    *     ),
-   *     @SWG\Response(
+   *     @OA\Response(
    *         response="404",
    *         description="Not found",
-   *         @SWG\Schema(ref="#/definitions/CheckinRequestErrorResponse")
+   *         @OA\Schema(ref="#/definitions/CheckinRequestErrorResponse")
    *     ),
-   *     @SWG\Response(
+   *     @OA\Response(
    *         response="500",
    *         description="Generic server error",
-   *         @SWG\Schema(ref="#/definitions/CheckinRequestErrorResponse")
+   *         @OA\Schema(ref="#/definitions/CheckinRequestErrorResponse")
    *     ),
    *     security={
    *         {
@@ -70,38 +71,38 @@ class CheckinRequestController extends ServiceController
     return $this->createCheckinRequest();
   }
     /**
-     * @SWG\Post(
+     * @OA\Post(
      *     path="/v0.1/checkin-requests",
      *     summary="Process a checkin request",
      *     tags={"checkin-requests"},
      *     operationId="processCheckinRequest",
      *     consumes={"application/json"},
      *     produces={"application/json"},
-     *     @SWG\Parameter(
+     *     @OA\Parameter(
      *         name="NewCheckinRequest",
      *         in="body",
      *         description="Request object based on the included data model",
      *         required=true,
-     *         @SWG\Schema(ref="#/definitions/NewCheckinRequest")
+     *         @OA\Schema(ref="#/definitions/NewCheckinRequest")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
-     *         @SWG\Schema(ref="#/definitions/CheckinRequestResponse")
+     *         @OA\Schema(ref="#/definitions/CheckinRequestResponse")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="401",
      *         description="Unauthorized"
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="404",
      *         description="Not found",
-     *         @SWG\Schema(ref="#/definitions/CheckinRequestErrorResponse")
+     *         @OA\Schema(ref="#/definitions/CheckinRequestErrorResponse")
      *     ),
-     *     @SWG\Response(
+     *     @OA\Response(
      *         response="500",
      *         description="Generic server error",
-     *         @SWG\Schema(ref="#/definitions/CheckinRequestErrorResponse")
+     *         @OA\Schema(ref="#/definitions/CheckinRequestErrorResponse")
      *     ),
      *     security={
      *         {
@@ -261,7 +262,7 @@ class CheckinRequestController extends ServiceController
      * @param Request    $request
      * @return \Slim\Http\Response
      */
-    protected function processException($errorType, $errorMessage, \Exception $exception, Request $request)
+    protected function processException($errorType, $errorMessage, \Exception $exception, ServerRequest $request)
     {
         $statusCode = 500;
         if ($exception instanceof APIException) {
@@ -293,6 +294,6 @@ class CheckinRequestController extends ServiceController
             $exception
         );
 
-        return $this->getResponse()->withJson($errorResp)->withStatus($statusCode);
+        return $this->getJsonResponse($errorResp)->withStatus($statusCode);
     }
 }

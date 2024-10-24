@@ -5,7 +5,7 @@ use NYPL\Starter\APILogger;
 use NYPL\Starter\Config;
 use NYPL\Starter\Controller;
 use NYPL\Starter\Model\Response\ErrorResponse;
-use Slim\Container;
+use Aura\Di\Container;
 
 /**
  * Class ServiceController
@@ -31,8 +31,8 @@ class ServiceController extends Controller
     /**
      * Controller constructor.
      *
-     * @param \Slim\Container $container
-     * @param int             $cacheSeconds
+     * @param \Aura\Di\Container $container
+     * @param int                $cacheSeconds
      */
     public function __construct(Container $container, int $cacheSeconds = 0)
     {
@@ -138,7 +138,7 @@ class ServiceController extends Controller
      */
     public function invalidScopeResponse(\Exception $exception)
     {
-        return $this->getResponse()->withJson(
+        return $this->getJsonResponse(
             new ErrorResponse(
                 '403',
                 'invalid-scope',
@@ -153,7 +153,7 @@ class ServiceController extends Controller
      */
     public function invalidRequestResponse(\Exception $exception)
     {
-        return $this->getResponse()->withJson(
+        return $this->getJsonResponse(
             new ErrorResponse(
                 '400',
                 'invalid-request',

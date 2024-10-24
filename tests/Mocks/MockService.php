@@ -1,10 +1,13 @@
 <?php
 namespace NYPL\Services\Test\Mocks;
 
+use Aura\Di\Injection\InjectionFactory;
+use Aura\Di\Resolver\Resolver;
+use Aura\Di\Resolver\Reflector;
 use NYPL\Services\ServiceContainer;
-use Slim\Http\Environment;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use NYPL\Starter\Service;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\ServerRequest;
 
 /**
  * Class MockService
@@ -13,33 +16,7 @@ use Slim\Http\Response;
  */
 class MockService
 {
-    public static $mockEnvironment;
     public static $mockContainer;
-
-    /**
-     * Initialize mock Slim request.
-     *
-     * @param array $serverParams
-     * @param array $data
-     */
-    public static function setMockEnvironment(array $serverParams = [], array $data = [])
-    {
-        if (empty($serverParams)) {
-            $serverParams = [
-                'REQUEST_METHOD' => 'POST',
-                'REQUEST_URI' => '/',
-            ];
-        }
-
-        self::$mockEnvironment = Environment::mock($serverParams);
-
-        if (!empty($data)) {
-            $_POST = $data;
-        }
-
-        self::$mockContainer['request'] = Request::createFromEnvironment(self::$mockEnvironment);
-        self::$mockContainer['response'] = new Response();
-    }
 
     /**
      * Set a concrete Container class to pass to controllers.
@@ -48,18 +25,19 @@ class MockService
      */
     public static function setMockContainer()
     {
-        self::$mockContainer = new ServiceContainer();
-        $params = [
-            'X-NYPL-Identity' =>
-                '{"token":"blah","identity":{"sub":null,"scope":"openid offline_access api read:hold_request"}}'
-        ];
+        $reflector = new Reflector();
+        $resolver = new Resolver($reflector);
+        $injectionFactory = new InjectionFactory($resolver);
+        self::$mockContainer = new ServiceContainer($injectionFactory);
 
-        if ($params) {
-            foreach ($params as $name => $value) {
-                self::$mockContainer['request']->withAddedHeader($name, $value);
-            }
-        }
-        self::$mockContainer['response'];
+        $headers = [
+            'X-NYPL-Identity' => 
+            '{"token":"blah","identity":{"sub":null,"scope":"openid offline_access api read:hold_request"}}'
+        ];
+        $body = '{"itemBarcode": "1234567890123", "owningInstitutionId": "NYPL", "cancelRequestId": "1234567890", "jobId": "991873slx938"}';
+        self::$mockContainer->set("request", new ServerRequest('POST', '/', $headers, $body));
+        self::$mockContainer->set("response", new Response(200));
+
     }
 
     /**

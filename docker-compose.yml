@@ -1,0 +1,27 @@
+services:
+  checkin-request-service-web:
+    build:
+      context: .
+      dockerfile: Dockerfile-local
+    container_name: checkin-request-service-web
+    ports:
+      - "8888:80"
+    networks:
+      checkinservice:
+    volumes:
+      - ./:/var/www/html
+  checkin-request-service-db:
+    image: postgres:10.5-alpine
+    container_name: checkin-service-postgres-db
+    environment:
+      - POSTGRES_DB=checkin_requests
+      - POSTGRES_PASSWORD=localpasswordsimplepassword
+    ports:
+      - "25432:5432"
+    networks:
+      checkinservice:
+    volumes:
+      - ./db/init-test-db.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  checkinservice:
