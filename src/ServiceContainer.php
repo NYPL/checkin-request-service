@@ -15,11 +15,13 @@ class ServiceContainer extends DefaultContainer
     /**
      * ServiceContainer constructor.
      */
+    public $settings = [];
+
     public function __construct(
         InjectionFactory $injectionFactory,
         ContainerInterface $delegateContainer = null)
     {
         parent::__construct($injectionFactory,  $delegateContainer);
-        $this["settings"]["displayErrorDetails"] = true;
+        $this->settings["displayErrorDetails"] = true;
     }
 }
