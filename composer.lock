@@ -1364,12 +1364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/NYPL/php-microservice-starter.git",
-                "reference": "2ebe48650717c90f34c36b1590146a7f64c8d048"
+                "reference": "325b3c0a38488a46188185de69bf9fa5f336679d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NYPL/php-microservice-starter/zipball/2ebe48650717c90f34c36b1590146a7f64c8d048",
-                "reference": "2ebe48650717c90f34c36b1590146a7f64c8d048",
+                "url": "https://api.github.com/repos/NYPL/php-microservice-starter/zipball/325b3c0a38488a46188185de69bf9fa5f336679d",
+                "reference": "325b3c0a38488a46188185de69bf9fa5f336679d",
                 "shasum": ""
             },
             "require": {
