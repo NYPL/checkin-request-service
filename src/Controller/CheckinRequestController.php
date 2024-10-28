@@ -12,8 +12,6 @@ use NYPL\Services\ServiceController;
 use NYPL\Starter\APIException;
 use NYPL\Starter\APILogger;
 use NYPL\Starter\Filter;
-use Slim\Http\Request;
-use Slim\Http\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 
 /**
@@ -259,8 +257,8 @@ class CheckinRequestController extends ServiceController
      * @param string     $errorType
      * @param string     $errorMessage
      * @param \Exception $exception
-     * @param Request    $request
-     * @return \Slim\Http\Response
+     * @param \ServerRequest    $request
+     * @return \GuzzleHttp\Psr7\Response
      */
     protected function processException($errorType, $errorMessage, \Exception $exception, ServerRequest $request)
     {
