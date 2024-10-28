@@ -30,12 +30,21 @@ class MockService
         $injectionFactory = new InjectionFactory($resolver);
         self::$mockContainer = new ServiceContainer($injectionFactory);
 
-        $headers = [
-            'X-NYPL-Identity' => 
-            '{"token":"blah","identity":{"sub":null,"scope":"openid offline_access api read:hold_request"}}'
+        $_POST = [  
+            'itemBarcode' => '1234567890123',
+            'owningInstitutionId' => 'NYPL',
+            'cancelRequestId' => '1234567890',
+            'jobId' => '991873slx938'
         ];
-        $body = '{"itemBarcode": "1234567890123", "owningInstitutionId": "NYPL", "cancelRequestId": "1234567890", "jobId": "991873slx938"}';
-        self::$mockContainer->set("request", new ServerRequest('POST', '/', $headers, $body));
+        $_SERVER = [
+            'REQUEST_METHOD' => 'POST',
+            'REQUEST_URI' => '/',
+            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_CONTENT_TYPE' => 'application/json',
+            'HTTP_X_NYPL_IDENTITY' => '{"token":"blah","identity":{"sub":null,"scope":"openid offline_access api read:hold_request"}}'
+        ];
+        $request = ServerRequest::fromGlobals();
+        self::$mockContainer->set("request", $request);
         self::$mockContainer->set("response", new Response(200));
 
     }
