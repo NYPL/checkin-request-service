@@ -1,3 +1,7 @@
+# Deprecated
+
+As of Apr 3 2025, this app has been replaced by https://github.com/NYPL/item-circ-service
+
 # NYPL Checkin Request Service
 
 [![Build Status](https://travis-ci.org/NYPL/checkin-request-service.svg?branch=master)](https://travis-ci.org/NYPL/checkin-request-service)
