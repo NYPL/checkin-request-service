@@ -5,7 +5,7 @@ use NYPL\Services\Model\CheckinRequestModel;
 use NYPL\Starter\Model\ModelTrait\TranslateTrait;
 
 /**
- * @SWG\Definition(title="NewCheckinRequest", type="object")
+ * @OA\Definition(title="NewCheckinRequest", type="object")
  *
  * @package NYPL\Services\Model\CheckinRequest
  */

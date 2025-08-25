@@ -10,7 +10,7 @@ class CheckinItemTest extends TestCase
     public $checkinRequest;
     public $checkinItem;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

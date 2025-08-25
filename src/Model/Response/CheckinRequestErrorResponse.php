@@ -4,7 +4,7 @@ namespace NYPL\Services\Model\Response;
 use NYPL\Starter\Model\Response\ErrorResponse;
 
 /**
- * @SWG\Definition(title="CheckinRequestErrorResponse", type="object")
+ * @OA\Definition(title="CheckinRequestErrorResponse", type="object")
  */
 class CheckinRequestErrorResponse extends ErrorResponse
 {

@@ -11,25 +11,25 @@ use NYPL\Starter\Model;
 class CheckinRequestModel extends Model
 {
     /**
-     * @SWG\Property(example="1234567890")
+     * @OA\Property(example="1234567890")
      * @var string
      */
     public $itemBarcode;
 
     /**
-     * @SWG\Property(example="NYPL")
+     * @OA\Property(example="NYPL")
      * @var string
      */
     public $owningInstitutionId;
 
     /**
-     * @SWG\Property(example="1234567890")
+     * @OA\Property(example="1234567890")
      * @var int
      */
     public $cancelRequestId;
 
     /**
-     * @SWG\Property(example="991873slx938")
+     * @OA\Property(example="991873slx938")
      * @var string
      */
     public $jobId;

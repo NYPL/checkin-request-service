@@ -87,17 +87,13 @@ class MockConfig extends Config
 
     protected static function loadConfiguration()
     {
-        $dotEnv = new Dotenv(self::getConfigDirectory(), self::ENVIRONMENT_FILE);
+        $dotEnv = Dotenv::createImmutable(self::getConfigDirectory(), self::ENVIRONMENT_FILE);
         $dotEnv->load();
 
         if (file_exists(self::getConfigDirectory() . 'tests/Mocks/' . self::CONFIG_FILE)) {
-            $dotEnv = new Dotenv(self::getConfigDirectory() . 'tests/Mocks/', self::CONFIG_FILE);
+            $dotEnv = Dotenv::createImmutable(self::getConfigDirectory() . 'tests/Mocks/', self::CONFIG_FILE);
             $dotEnv->load();
         }
-
-        $dotEnv->required(self::getRequired());
-
-        $dotEnv->required(self::getAddedRequired());
 
         self::setInitialized(true);
     }

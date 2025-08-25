@@ -5,12 +5,12 @@ use NYPL\Services\Model\CheckinRequest\CheckinRequest;
 use NYPL\Starter\Model\Response\SuccessResponse;
 
 /**
- * @SWG\Definition(title="CheckinRequestResponse", type="object")
+ * @OA\Definition(title="CheckinRequestResponse", type="object")
  */
 class CheckinRequestResponse extends SuccessResponse
 {
     /**
-     * @SWG\Property
+     * @OA\Property
      * @var CheckinRequest
      */
     public $data;

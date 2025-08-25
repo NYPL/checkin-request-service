@@ -1,4 +1,3 @@
-version: '2'
 services:
   checkin-request-service-db:
     image: postgres:10.5-alpine

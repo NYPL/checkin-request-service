@@ -10,7 +10,7 @@ class CheckinRequestControllerTest extends TestCase
 {
     public $fakeCheckinController;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         MockConfig::initialize(__DIR__ . '/../../');
@@ -22,9 +22,8 @@ class CheckinRequestControllerTest extends TestCase
             public $container;
             public $cacheSeconds;
 
-            public function __construct(\Slim\Container $container, $cacheSeconds)
+            public function __construct(\Aura\Di\Container $container, $cacheSeconds)
             {
-                $this->setUseJobService(1);
                 parent::__construct($container, $cacheSeconds);
             }
 
@@ -45,7 +44,7 @@ class CheckinRequestControllerTest extends TestCase
 
         $response = $controller->createCheckinRequest();
 
-        self::assertInstanceOf('Slim\Http\Response', $response);
+        self::assertInstanceOf('GuzzleHttp\Psr7\Response', $response);
     }
 
     /**
